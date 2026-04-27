@@ -1,7 +1,7 @@
-- name: Install Nodejs repo files
+- name: Install NodeJS repo files
   ansible.builtin.shell: curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
 
-- name: Install Nginx and Nodejs
+- name: Install nginx & NodeJS
   ansible.builtin.dnf:
     name:
       - '@nginx:1.26'
@@ -9,6 +9,7 @@
     state: present
 
 - name: Update Nginx Config
+  notify: Restart Nginx
   ansible.builtin.template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
@@ -33,4 +34,4 @@
   ansible.builtin.systemd_service:
     name: nginx
     enabled: true
-    state: restarted
+    state: started
