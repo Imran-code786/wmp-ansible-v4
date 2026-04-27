@@ -5,7 +5,7 @@
     state: present
 
 - name: Copy service file
-  ansible.builtin.templates:
+  ansible.builtin.template:
     src: auth-service.service
     dest: /etc/systemd/system/auth-service.service
 
